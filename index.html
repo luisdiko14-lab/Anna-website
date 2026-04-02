@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anna The Bot ✨</title>
+
+<style>
+:root{
+  --bg:#070a12;
+  --card:rgba(255,255,255,0.05);
+  --text:#fff;
+  --accent:#7c5cff;
+  --accent2:#00e0ff;
+}
+
+body{
+  margin:0;
+  font-family: Inter, sans-serif;
+  background: radial-gradient(circle at top, #0b1020, #05070d);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* 🔥 LOADING SCREEN */
+.loader{
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  background:#05070d;
+  z-index:999;
+}
+
+.bar{
+  width:250px;
+  height:10px;
+  border-radius:20px;
+  background:#111;
+  overflow:hidden;
+  margin-top:10px;
+}
+
+.bar-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  box-shadow:0 0 20px var(--accent2);
+}
+
+.glow{
+  font-size:2rem;
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  0%{opacity:.5}
+  50%{opacity:1}
+  100%{opacity:.5}
+}
+
+/* 🌌 HERO */
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+.hero{
+  text-align:center;
+  padding:80px 20px;
+}
+
+.hero h1{
+  font-size:3rem;
+  background:linear-gradient(90deg,#fff,var(--accent2));
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  color:#aaa;
+}
+
+/* ✨ BUTTONS */
+.btn{
+  padding:12px 20px;
+  border-radius:999px;
+  text-decoration:none;
+  color:white;
+  font-weight:bold;
+  display:inline-block;
+  margin:10px;
+  transition:.2s;
+}
+
+.btn:hover{
+  transform:scale(1.05);
+}
+
+.primary{
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+}
+
+.secondary{
+  background:#111;
+  border:1px solid #333;
+}
+
+/* 💎 GLASS CARD */
+.card{
+  backdrop-filter:blur(20px);
+  background:var(--card);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:20px;
+  padding:20px;
+  margin-top:30px;
+  box-shadow:0 0 40px rgba(0,0,0,.5);
+}
+
+/* 🌟 FEATURES */
+.features{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+  margin-top:30px;
+}
+
+.feature{
+  padding:20px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.04);
+  transition:.3s;
+}
+
+.feature:hover{
+  transform:translateY(-5px) scale(1.02);
+  box-shadow:0 0 25px rgba(124,92,255,.3);
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  margin-top:40px;
+  color:#666;
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔥 LOADER -->
+<div class="loader" id="loader">
+  <div class="glow">🤖 Anna Booting...</div>
+  <div class="bar"><div class="bar-fill" id="bar"></div></div>
+</div>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Anna The Bot 🤖✨</h1>
+    <p>Your next-level Discord experience 🚀</p>
+
+    <a class="btn primary" href="https://discord.gg/anna">🚀 Join Server</a>
+    <a class="btn secondary" id="loginBtn">🔐 Login with Discord</a>
+  </div>
+
+  <!-- INFO -->
+  <div class="card">
+    <h2>📘 About Anna</h2>
+    <p>
+      ✨ Anna is a modern Discord bot built to stand out.<br>
+      ⚡ Fast, responsive, and smooth experience.<br>
+      🎮 Designed for fun, moderation, and utility.<br>
+      🤖 Smart commands and clean UI interactions.<br>
+      🌐 Includes a stylish website with OAuth2 login.<br>
+      🔐 Secure Discord authentication system.<br>
+      🎨 Fully customizable and expandable.<br>
+      📱 Mobile-friendly and responsive design.<br>
+      🚀 Built for communities that want more.<br>
+      💎 Clean, cool, and powerful.
+    </p>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="features">
+    <div class="feature">⚡ Fast Commands</div>
+    <div class="feature">🎵 Music System</div>
+    <div class="feature">🛡️ Moderation</div>
+    <div class="feature">🎉 Fun & Games</div>
+    <div class="feature">📊 Stats & Logs</div>
+    <div class="feature">🔧 Easy Setup</div>
+  </div>
+
+  <footer>
+    Made by Luis and Owner is zeldafan. @ All rights reserved! 2026 • https://discord.gg/KpK6f8VxvP
+  </footer>
+
+</div>
+
+<script>
+// 🔐 DISCORD OAUTH2
+const clientId = "1484899434797203486";
+const redirect = window.location.origin + "Anna-Website/callback.html";
+
+document.getElementById("loginBtn").href =
+`https://discord.com/oauth2/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirect)}&response_type=code&scope=identify`;
+
+// 🔥 LOADING BAR
+let bar = document.getElementById("bar");
+let loader = document.getElementById("loader");
+let width = 0;
+
+let interval = setInterval(()=>{
+  width += Math.random()*10;
+  bar.style.width = width + "%";
+
+  if(width >= 100){
+    clearInterval(interval);
+    setTimeout(()=> loader.style.display="none", 500);
+  }
+},120);
+</script>
+
+</body>
+</html>
