@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anna OAuth2 Callback 🔐</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Inter,sans-serif;
+  background: radial-gradient(circle at top,#0b1020,#05070d);
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+}
+
+/* 💎 CARD */
+.card{
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(20px);
+  padding:30px;
+  border-radius:20px;
+  width:320px;
+  text-align:center;
+  box-shadow:0 0 40px rgba(0,0,0,.6);
+  border:1px solid rgba(255,255,255,0.1);
+  animation:fade 0.6s ease;
+}
+
+@keyframes fade{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+h1{
+  margin-bottom:10px;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:none;
+  margin-top:10px;
+  outline:none;
+  background:#111;
+  color:white;
+}
+
+/* BUTTON */
+button{
+  margin-top:15px;
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:999px;
+  background:linear-gradient(90deg,#7c5cff,#00e0ff);
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.2s;
+}
+
+button:hover{
+  transform:scale(1.05);
+}
+
+/* STATUS */
+.status{
+  font-size:.9rem;
+  color:#aaa;
+  margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>🔐 OAuth2</h1>
+  <p>🚧 Coming soon...</p>
+
+  <input id="username" placeholder="Enter your username 😎" />
+
+  <button onclick="go()">Continue ➡️</button>
+
+  <div class="status" id="status"></div>
+</div>
+
+<script>
+// Get ?code= from Discord (optional display)
+const params = new URLSearchParams(window.location.search);
+const code = params.get("code");
+
+if(code){
+  document.getElementById("status").innerText = "✅ Discord auth detected";
+}
+
+// Redirect function
+function go(){
+  const username = document.getElementById("username").value.trim();
+
+  if(!username){
+    alert("⚠️ enter a username bro");
+    return;
+  }
+
+  // redirect to your main site
+  window.location.href = `index.html?username=${encodeURIComponent(username)}`;
+}
+</script>
+
+</body>
+</html>
